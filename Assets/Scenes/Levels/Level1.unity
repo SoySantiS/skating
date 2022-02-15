@@ -1105,6 +1105,52 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &726857466
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 726857468}
+  - component: {fileID: 726857467}
+  m_Layer: 0
+  m_Name: CanvasManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &726857467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726857466}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd72addf97de47eea2c5140e25bd0aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  winCanvas: {fileID: 513371079}
+  normalCanvas: {fileID: 1808580576}
+  joystickCanvas: {fileID: 118909745}
+--- !u!4 &726857468
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726857466}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &775701656
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,6 +2105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b904328c9424fcba79982e8169fe563, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: {fileID: 1134338209}
+  animator: {fileID: 1662336940}
+  highscore: {fileID: 1179382628}
+  loadLastLvl: {fileID: 1655783279}
   scoreText: {fileID: 1410074755}
   setTexts: {fileID: 2047700799}
   amount: 0
@@ -2066,14 +2116,7 @@ MonoBehaviour:
   onGameFinished:
     m_PersistentCalls:
       m_Calls: []
-  timer: {fileID: 1134338209}
   alreadyFinishedCounting: 0
-  animator: {fileID: 1662336940}
-  highscore: {fileID: 1179382628}
-  winCanvas: {fileID: 513371079}
-  normalCanvas: {fileID: 1808580576}
-  joystickCanvas: {fileID: 118909745}
-  loadLastLvl: {fileID: 1655783279}
 --- !u!4 &1637477608
 Transform:
   m_ObjectHideFlags: 0

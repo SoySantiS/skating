@@ -28,7 +28,19 @@ public class Timer : MonoBehaviour
     {
         get => seconds;
     }
-    
+
+    private void Awake()
+    {
+        if (SharedInstance == null)
+        {
+            SharedInstance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
+
     private void Update()
     {
         if (playerMovement.gameFinished == false)

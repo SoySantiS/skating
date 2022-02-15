@@ -1,0 +1,25 @@
+﻿using UnityEngine;
+
+namespace _Scripts.Points
+{
+    public class ActivateCanvas : MonoBehaviour
+    {
+        //Canvas:
+        [SerializeField] private Canvas winCanvas, normalCanvas, joystickCanvas;
+        
+        private void Start()
+        {
+            winCanvas.gameObject.SetActive(false);
+            normalCanvas.gameObject.SetActive(true);
+            
+            PointsManager.SharedInstance.onGameFinished.AddListener(GameEnds);
+        }
+
+        public void GameEnds()
+        {
+            winCanvas.gameObject.SetActive(true);
+            normalCanvas.gameObject.SetActive(false);
+            joystickCanvas.gameObject.SetActive(false);
+        }
+    }
+}
