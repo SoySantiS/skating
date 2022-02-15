@@ -11,6 +11,13 @@ public class GameManager : MonoBehaviour
     //Eventos:
     public UnityEvent onGameFinished;
 
+    private bool gameFinished;
+    public bool GameFinished
+    {
+        get => gameFinished;
+        set => gameFinished = value;
+    }
+
     private void Awake()
     {
         if (SharedInstance == null)
@@ -21,5 +28,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);
         }
+        
+        //llamo a la función de GameOver()
+        onGameFinished.AddListener(GameOver);
+
+        gameFinished = false;
+    }
+
+    void GameOver()
+    {
+        gameFinished = true;
     }
 }

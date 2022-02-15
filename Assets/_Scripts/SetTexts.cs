@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SetTexts : MonoBehaviour
 {
-    [SerializeField] private TMP_Text actualScore, highScore, actualTime, bestTime;
+    [SerializeField] private TMP_Text actualScore, highScore, actualTime, bestTime, scoreText;
 
     public bool lowestTime, bestScore;
     public void LoadTextValues()
@@ -25,5 +25,10 @@ public class SetTexts : MonoBehaviour
     private void Start()
     {
         GameManager.SharedInstance.onGameFinished.AddListener(LoadTextValues);
+    }
+
+    public void ChamgeScoreText()
+    {
+        scoreText.text = $"Score: {PointsManager.SharedInstance.Amount.ToString()}";
     }
 }

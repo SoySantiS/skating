@@ -2,7 +2,7 @@
 
 namespace _Scripts.Points
 {
-    public class ActivateCanvas : MonoBehaviour
+    public class CanvasManager : MonoBehaviour
     {
         //Canvas:
         [SerializeField] private Canvas winCanvas, normalCanvas, joystickCanvas;

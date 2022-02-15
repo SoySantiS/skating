@@ -1,19 +1,10 @@
-﻿using System;
-using UnityEngine;
-using TMPro;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 
 public class PointsManager : MonoBehaviour
 {
     public static PointsManager SharedInstance;
     
-    //Referencias: 
-    [SerializeField] private Highscore highscore;
-    [SerializeField] private LoadLastLvl loadLastLvl;
-    
-    //Textos:
-    [SerializeField] private TMP_Text scoreText;
+    //Textos (script):
     [SerializeField] private SetTexts setTexts;
     
     //Puntos:
@@ -21,20 +12,12 @@ public class PointsManager : MonoBehaviour
     public int Amount
     {
         get => amount;
-        set => amount = value;
     }
+    
     public CheckPoints checkPoint;
     
-    
-    public bool alreadyFinishedCounting; // hay una variable que hace lo mismo en player movement ("game finished")
-    private bool gameFinished; // hay una variable que hace lo mismo en player movement ("game finished").
-    public bool GameFinished
-    {
-        get => gameFinished;
-        set => gameFinished = value;
-    }
-    //TODO: en el gameManager, usar la variable de game finished
-
+    //Variables:
+    public bool alreadyCounting;
 
     /// <summary>
     /// Inicializo el singleton.
@@ -44,7 +27,6 @@ public class PointsManager : MonoBehaviour
         if (SharedInstance == null)
         {
             SharedInstance = this;
-            //DontDestroyOnLoad(this);
         }else
         {
             Destroy(this);
@@ -60,7 +42,7 @@ public class PointsManager : MonoBehaviour
     public void AddPoints(int numberOfPoints)
     {
         amount += numberOfPoints;
-        scoreText.text = $"Score: {amount.ToString()}";
+        setTexts.ChamgeScoreText();
     }
     
     /// <summary>
@@ -68,27 +50,18 @@ public class PointsManager : MonoBehaviour
     /// </summary>
     void FinalCountOfPoints()
     {
-        gameFinished = true;
-            
         Time.timeScale = 1;
-            
-        alreadyFinishedCounting = true;
-
-        CheckExtraPoints();
-    }
-
-    /// <summary>
-    /// Metodo que hace un chequeo de si hay que sumar puntos por terminar antes de x tiempo la partida
-    /// </summary>
-    void CheckExtraPoints()
-    {
+        alreadyCounting = true;    
+        
+        //chequeo de si hay que sumar puntos por terminar antes de x tiempo la partida:
         if (Timer.SharedInstance.Minutes <= checkPoint.Minutes)
         {
             if (Timer.SharedInstance.Seconds <= checkPoint.Seconds)
             {
                 var points = PlayerPrefs.GetInt("Last Score") + checkPoint.Points;
+                print(checkPoint.Points);
                 PlayerPrefs.SetInt("Last Score", points);
             }
-        } 
+        }
     }
 }

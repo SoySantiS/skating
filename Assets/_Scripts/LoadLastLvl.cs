@@ -21,7 +21,7 @@ public class LoadLastLvl : MonoBehaviour
     public void LoadLevel()
     {
         var lastLevel = PlayerPrefs.GetInt("Level", 1);
-        if (PointsManager.SharedInstance.GameFinished)
+        if (GameManager.SharedInstance.GameFinished)
         {
             lastLevel++;
             print(lastLevel);

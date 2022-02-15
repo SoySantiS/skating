@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         if (other.gameObject.tag == "Finish")
         {
             gameFinished = true;
-            if (PointsManager.SharedInstance.alreadyFinishedCounting == false)
+            if (PointsManager.SharedInstance.alreadyCounting == false)
             {
                 GameManager.SharedInstance.onGameFinished.Invoke();
             }

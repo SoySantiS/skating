@@ -26,7 +26,6 @@ public class LvlManager : MonoBehaviour
         if (SharedInstance == null)
         {
             SharedInstance = this;
-            DontDestroyOnLoad(this);
         }
         else
         {

@@ -25,7 +25,7 @@ public class Buttons : MonoBehaviour
     }
     void RefreshLvlValues()
     {
-        if (PointsManager.SharedInstance.GameFinished)
+        if (GameManager.SharedInstance.GameFinished)
         {
             LvlManager.SharedInstance.CurrentLvl++;
             LvlManager.SharedInstance.NextLvl++;
