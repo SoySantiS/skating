@@ -12,7 +12,7 @@ namespace _Scripts.Points
             winCanvas.gameObject.SetActive(false);
             normalCanvas.gameObject.SetActive(true);
             
-            PointsManager.SharedInstance.onGameFinished.AddListener(GameEnds);
+            GameManager.SharedInstance.onGameFinished.AddListener(GameEnds);
         }
 
         public void GameEnds()

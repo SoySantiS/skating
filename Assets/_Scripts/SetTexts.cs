@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -20,6 +21,9 @@ public class SetTexts : MonoBehaviour
             bestTime.gameObject.SetActive(true);
         }
     }
-    
-    
+
+    private void Start()
+    {
+        GameManager.SharedInstance.onGameFinished.AddListener(LoadTextValues);
+    }
 }

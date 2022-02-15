@@ -9,12 +9,8 @@ public class PointsManager : MonoBehaviour
     public static PointsManager SharedInstance;
     
     //Referencias: 
-    [SerializeField] private Timer timer;
-    [SerializeField] private Animator animator; //hacerlo en el player movement
     [SerializeField] private Highscore highscore;
     [SerializeField] private LoadLastLvl loadLastLvl;
-    
-     //hacerlo en otro script
     
     //Textos:
     [SerializeField] private TMP_Text scoreText;
@@ -28,9 +24,7 @@ public class PointsManager : MonoBehaviour
         set => amount = value;
     }
     public CheckPoints checkPoint;
-
-    //Eventos:
-    public UnityEvent onGameFinished;
+    
     
     public bool alreadyFinishedCounting; // hay una variable que hace lo mismo en player movement ("game finished")
     private bool gameFinished; // hay una variable que hace lo mismo en player movement ("game finished").
@@ -56,7 +50,7 @@ public class PointsManager : MonoBehaviour
             Destroy(this);
         }
         
-        onGameFinished.AddListener(FinalCountOfPoints); //cuando termine la partida, llama al metodo FinalCountOfPoints
+        GameManager.SharedInstance.onGameFinished.AddListener(FinalCountOfPoints); //cuando termine la partida, llama al metodo FinalCountOfPoints
     }
     
     /// <summary>
@@ -74,38 +68,26 @@ public class PointsManager : MonoBehaviour
     /// </summary>
     void FinalCountOfPoints()
     {
-            print("On final count of points");
+        gameFinished = true;
             
-            gameFinished = true;
+        Time.timeScale = 1;
             
-            Time.timeScale = 1;
-            
-            alreadyFinishedCounting = true;
-            
-            animator.SetBool("Moving", false);
-            
-            highscore.RegisterScore();
-            highscore.RegisterTime();
+        alreadyFinishedCounting = true;
 
-            CheckExtraPoints();
-
-            setTexts.LoadTextValues();
-            
-            loadLastLvl.SaveLevelValue();
+        CheckExtraPoints();
     }
 
+    /// <summary>
+    /// Metodo que hace un chequeo de si hay que sumar puntos por terminar antes de x tiempo la partida
+    /// </summary>
     void CheckExtraPoints()
     {
         if (Timer.SharedInstance.Minutes <= checkPoint.Minutes)
         {
-            //print($"menos de {checkPoint.Minutes} minuto(s)");
-            if (timer.Seconds <= checkPoint.Seconds)
+            if (Timer.SharedInstance.Seconds <= checkPoint.Seconds)
             {
-                //print($"sumar {checkPoint.Points} puntos");
-
                 var points = PlayerPrefs.GetInt("Last Score") + checkPoint.Points;
                 PlayerPrefs.SetInt("Last Score", points);
-                //print(PlayerPrefs.GetInt("Last Score"));
             }
         } 
     }

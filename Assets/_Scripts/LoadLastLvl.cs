@@ -1,9 +1,16 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class LoadLastLvl : MonoBehaviour
 {
     private int level;
+
+    private void Start()
+    {
+        GameManager.SharedInstance.onGameFinished.AddListener(SaveLevelValue);
+    }
+
     public void SaveLevelValue()
     {
         level = LvlManager.SharedInstance.CurrentLvl;

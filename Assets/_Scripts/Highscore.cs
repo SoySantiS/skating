@@ -11,6 +11,11 @@ public class Highscore : MonoBehaviour
     
     [SerializeField] private SetTexts setTexts;
 
+    private void Start()
+    {
+        GameManager.SharedInstance.onGameFinished.AddListener(RegisterValues);
+    }
+
     public void RegisterScore()
     {
         var actualScore = pointsManager.Amount;
@@ -47,5 +52,14 @@ public class Highscore : MonoBehaviour
                 setTexts.lowestTime = true;
             }
         }
+    }
+
+    /// <summary>
+    /// Es llamado al finalizar la partida, y registra los valores  (tiempo y puntaje)
+    /// </summary>
+    void RegisterValues()
+    {
+        RegisterScore();
+        RegisterTime();
     }
 }

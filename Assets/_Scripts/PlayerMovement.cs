@@ -26,6 +26,11 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponentInChildren<Animator>();
     }
 
+    private void Start()
+    {
+        GameManager.SharedInstance.onGameFinished.AddListener(GameFinished);
+    }
+
     void Update()
     {
         if (gameFinished == false)
@@ -52,6 +57,11 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
+    void GameFinished()
+    {
+        animator.SetBool("Moving", false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Finish")
@@ -59,7 +69,7 @@ public class PlayerMovement : MonoBehaviour
             gameFinished = true;
             if (PointsManager.SharedInstance.alreadyFinishedCounting == false)
             {
-                PointsManager.SharedInstance.onGameFinished.Invoke();
+                GameManager.SharedInstance.onGameFinished.Invoke();
             }
         }
     }   
