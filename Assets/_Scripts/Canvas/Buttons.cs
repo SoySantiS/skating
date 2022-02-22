@@ -26,7 +26,7 @@ public class Buttons : MonoBehaviour
     
     public void LoadLastLevel()
     {
-        loadLastLvl.LoadLevel();
+        loadLastLvl.LoadLastLevel();
         selectSFX.Play();
     }
     public void ToMenu()
@@ -54,6 +54,7 @@ public class Buttons : MonoBehaviour
 
     public void ClearData()
     {
-        PlayerPrefs.DeleteKey("Level");
+        PlayerPrefs.SetInt("Level", 1);
+        PlayerPrefs.SetInt("Last Game Finished",0);
     }
 }

@@ -29,25 +29,20 @@ public class LoadLastLvl : MonoBehaviour
         PlayerPrefs.Save();
     }
 
-    public void LoadLevel()
+    public void LoadLastLevel()
     {
         var nextLevel = PlayerPrefs.GetInt("Level");
         
         if (PlayerPrefs.GetInt("Last Game Finished") == 1)
         {
-            nextLevel++;
-            
+            level = PlayerPrefs.GetInt("Level");
+            PlayerPrefs.SetInt("Level", level+1);
+            SceneManager.LoadScene($"Level{PlayerPrefs.GetInt("Level",1)}");
             PlayerPrefs.SetInt("Last Game Finished", 0);
-            
-            PlayerPrefs.SetInt("Level", nextLevel);
-            print($"Next Level: {PlayerPrefs.GetInt("Level")}");
-            SceneManager.LoadScene($"Level{PlayerPrefs.GetInt("Level", nextLevel)}");
-            print($"Last game finished: {PlayerPrefs.GetInt("Last Game Finished")}");
         }
         else
         {
             SceneManager.LoadScene($"Level{nextLevel}");
-            print($"Last level: {nextLevel}");
         }
     }
 }

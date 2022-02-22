@@ -38,10 +38,10 @@ public class LvlManager : MonoBehaviour
     public void LoadNextLevel()
     {
         Time.timeScale = 1;
-        PlayerPrefs.SetInt("Level", level);
+        PlayerPrefs.SetInt("Level", level++);
+        print($"Level: {PlayerPrefs.GetInt("Level")}");
         
-        var lastLevel = PlayerPrefs.GetInt("Level") + 1;
-        print($"Last level: {lastLevel}");
+        var lastLevel = PlayerPrefs.GetInt("Level") + 1; ;
         
         SceneManager.LoadScene($"Level{lastLevel}");
         PlayerPrefs.SetInt("Level", lastLevel);
