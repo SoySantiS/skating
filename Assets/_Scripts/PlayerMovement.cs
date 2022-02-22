@@ -3,21 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Axis & speed")]
     [SerializeField] private float moveX;
     [SerializeField] private float moveY;
 
     [SerializeField] private float speed;
 
+    [Space]
+    [Header("Animating")]
     [SerializeField] private Animator animator;
     
     [Space]
-
+    [Header("Movement")]
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Joystick joystickMove;
-    
+
     public bool gameFinished;
     
     private void Awake()
@@ -50,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else
             {
-                animator.SetBool("Moving", false);
+                animator.SetBool("Moving", false);  
             }
             
         }
@@ -71,6 +75,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 GameManager.SharedInstance.onGameFinished.Invoke();
             }
+        }
+
+        if (other.gameObject.tag == "Respawn")
+        {
+            SceneManager.LoadScene($"Level{LvlManager.SharedInstance.NextLvl}");
         }
     }   
 }
