@@ -19,7 +19,6 @@ public class LoadLastLvl : MonoBehaviour
         }
     }
 
-
     private void Start()
     {
         GameManager.SharedInstance.onGameFinished.AddListener(SaveLevelValue);
@@ -32,19 +31,23 @@ public class LoadLastLvl : MonoBehaviour
 
     public void LoadLevel()
     {
-        var lastLevel = PlayerPrefs.GetInt("Level");
+        var nextLevel = PlayerPrefs.GetInt("Level");
         
         if (PlayerPrefs.GetInt("Last Game Finished") == 1)
         {
-            SceneManager.LoadScene($"Level{lastLevel + 1}");
-            print(PlayerPrefs.GetInt("Last Game Finished"));
+            nextLevel++;
+            
             PlayerPrefs.SetInt("Last Game Finished", 0);
-            LvlManager.SharedInstance.NextLvl++;
-            PlayerPrefs.SetInt("Level", LvlManager.SharedInstance.NextLvl);
+            
+            PlayerPrefs.SetInt("Level", nextLevel);
+            print($"Next Level: {PlayerPrefs.GetInt("Level")}");
+            SceneManager.LoadScene($"Level{PlayerPrefs.GetInt("Level", nextLevel)}");
+            print($"Last game finished: {PlayerPrefs.GetInt("Last Game Finished")}");
         }
         else
         {
-            SceneManager.LoadScene($"Level{lastLevel}");
+            SceneManager.LoadScene($"Level{nextLevel}");
+            print($"Last level: {nextLevel}");
         }
     }
 }

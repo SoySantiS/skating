@@ -29,8 +29,8 @@ public class GameManager : MonoBehaviour
 
     void GameOver()
     {
+        PlayerPrefs.SetInt("Last Game Finished", 1);
         DontDestroyOnLoad(finalCoutSFX);
         finalCoutSFX.Play();
-        PlayerPrefs.SetInt("Last Game Finished", 1);
     }
 }

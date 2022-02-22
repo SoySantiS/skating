@@ -42,7 +42,7 @@ public class SetTexts : MonoBehaviour
         }
     }
 
-    public void ChamgeScoreText()
+    public void ChangeScoreText()
     {
         scoreText.text = $"Score: {PointsManager.SharedInstance.Amount.ToString()}";
     }

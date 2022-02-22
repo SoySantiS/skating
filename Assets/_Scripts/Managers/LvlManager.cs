@@ -5,22 +5,8 @@ using UnityEngine.SceneManagement;
 public class LvlManager : MonoBehaviour
 {
     public static LvlManager SharedInstance;
-
-    private int currentLvl = 1;
-    public int CurrentLvl
-    {
-        get => currentLvl;
-        set => currentLvl = value;
-    }
     
-    static int nextLvl;
-    public int NextLvl
-    {
-        get => nextLvl;
-        set => nextLvl = value;
-    }
-
-    [SerializeField] private int levels;
+    static int level;
 
     private void Awake()
     {
@@ -38,12 +24,11 @@ public class LvlManager : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Level") == 0)
         {
-            nextLvl = 1;
-            PlayerPrefs.SetInt("Level", nextLvl);
+            PlayerPrefs.SetInt("Level", 1);
         }
         else
         {
-            nextLvl = PlayerPrefs.GetInt("Level", 1);
+            level = PlayerPrefs.GetInt("Level", 1);
         }
     }
 
@@ -53,9 +38,10 @@ public class LvlManager : MonoBehaviour
     public void LoadNextLevel()
     {
         Time.timeScale = 1;
-        PlayerPrefs.SetInt("Level", nextLvl);
+        PlayerPrefs.SetInt("Level", level);
         
         var lastLevel = PlayerPrefs.GetInt("Level") + 1;
+        print($"Last level: {lastLevel}");
         
         SceneManager.LoadScene($"Level{lastLevel}");
         PlayerPrefs.SetInt("Level", lastLevel);

@@ -47,7 +47,7 @@ public class PointsManager : MonoBehaviour
     public void AddPoints(int numberOfPoints)
     {
         amount += numberOfPoints;
-        setTexts.ChamgeScoreText();
+        setTexts.ChangeScoreText();
     }
     
     /// <summary>

@@ -79,7 +79,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (other.gameObject.tag == "Respawn")
         {
-            SceneManager.LoadScene($"Level{LvlManager.SharedInstance.NextLvl}");
+            SceneManager.LoadScene($"Level{PlayerPrefs.GetInt("Level")}");
         }
     }   
 }
